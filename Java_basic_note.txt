@@ -1,0 +1,2369 @@
+1 配置环境变量 JAVA_HOME=C:\Program files\java\jdk1.8.0_151(新建变量)
+               path=%JAVA_HOME%\bin;------>配置可执行文件路径
+			   
+  set:显示系统变量 set JAVA_HOME显示指定变量  set path=""当前有效  set path="";%path%(在原path后面追加)
+  set path=(删除变量)
+  
+2 java程序中，如果需要执行，则需要加上主方法：public static void main(String[] args){}
+  如果程序不用执行，就不用加主方法
+  
+3 System.out.print()调用系统输出  System.out.println():调用系统输出且输出一行空白行
+ 
+4 给JVM配置环境变量 set classpath=C:\users\Administrator\Desktop\JavaApp 这样运行java程序时会自动在这个路径下
+  寻找class文件：如果配置了classpath环境变量，JVM会在classpath路径下寻找class文件，如果没有配置，JVM只在当前
+  路径下寻找    
+  
+  如果 set classpath=set classpath=C:\users\Administrator\Desktop\JavaApp; JVM会先在classpath路
+  径下寻找，再在当前默认路径下寻找（有无分号的区别）  加分号实际上会在后面加上.,表示当前目录  
+  
+  set classpath=.;C:\users\Administrator\Desktop\JavaApp
+  .表示当前目录，这样就可以兼顾当前目录,先找当前，再找设置路径
+  
+5 系统变量在整个系统有效，用户变量只在该用户下有效
+
+6 注释--->说明或者调试程序  单行注释---->//    多行注释----->/*注释内容*/   文档注释：java特有---->/**注释内容*/--->可通过
+         javadoc.exe提取文档信息和代码，生成html的程序说明书
+		 
+7 编程之前先写注释:养成良好的编程思考习惯
+  /*
+  需求：.....   思路：..... 步骤：..... 代码:......  测试：...
+  */
+  
+8  负数二进制--->对应正数取反加一，负数的二进制最高位都是1
+   -1  ----> 1111 1111
+   
+9 整数默认存储int    小数默认存储double 
+  long a = 1234567890l;(l表示long int 类型)
+  float b =2.3f(小数后加f可以表示单精度)
+  
+10  byte b = 4; b = b + 1（因为1是int类型，不同类型相加，类型自动提升，b提升为int，计算过程中提升）;
+    由于b是byte类型，所以产生类型不匹配的错误
+	
+	byte b=3;(3是常量，在byte范围内，所以编译器会自动转换)  b=b+1(b+1是变量，值不确定，所以编译器自动转换的话有可能造成精度丢失）
+	
+11  char ch=97---->a ASCII码   a%b---->符号取决于左边a的符号（-2%5=-2）
+    a++和++a----->当自增运算独立进行时两者无区别，但是当自增跟其他运算符号一起运算时b=++a--->a=a+1,b=a;b=a++---->b=a,a=a+1
+	
+12  字符串连接符号+  --->"5"+5:结果为字符串55---->字符串与任何相加，结果都是字符串
+
+13 short s = 4;s = s + 5//编译失败  而s += 5//编译通过，+=是赋值运算符，会做自动转换，即把是s+5的值赋给s
+
+14 逻辑运算符号：
+     &和&&的区别：
+       &：两边都参与运算 y>3 &ｙ＜６
+	   &&:当左边为false时，右边不参与运算，又称作短路与
+	   
+	 
+    ｜和｜｜的区别：
+       ｜：两边都参与运算 y>3 ｜ｙ＜６
+	   ｜｜:当左边为true时，右边不参与运算，又称作短路||
+	   
+15 位运算符号：
+      <<:相当于乘以2的倍数  3<<2=3*2^2=12，空位补0
+	  >>:相当于除以2的倍数  原最高位是什么，空位就补什么
+	  >>>:无符号右移        无论原最高位是什么，空位补0----->操作二进制数中的一段时
+	  
+	  &：位与
+	  异或两次还是原来的数：6^3^3=6  6^3^6=3   ~6+1=-7
+	  
+16   不通过第三变量去互换两个变量的值：int a=3;int b=4;
+          1 通过和的形式：a=a+b;b=a-b;a=a-b;(弊端：a+b可能超出int范围)
+		  2  用异或：     a=a^b;b=a^b;a=a^b;
+		  
+17    三元运算符： （条件表达式）？ 表达式1：表达式2
+
+18    switch(x) 选择结构无顺序,x只能是byte,short,int,char类型 5.0 enum 7.0 String 
+
+      if和switch的区别：
+	     if 可以用于判断数值，也可以判断区间  只要运算结果是boolean类型，都可以进行判断
+		 
+		 switch 用于对固定的几个值，进行判断，判断的值类型有限
+		 
+19   最简单的无限循环：  while(true) {}                  for(; ;) {}
+
+20   break:使用范围-------switch 和 循环语句中，与if判断无关，即不是跳出if判断  break 默认跳出当前所在循环，当你给不同循环做标记时，break可以选择性跳出循环
+     
+	 outer: for(int x=0;x<3;x++)
+		{
+			inner: for(int y=0;y<4;y++)
+			{
+				System.out.println("x="+x);
+				break outer;
+			}
+		}
+		
+20   continue:只作用于循环结构，结束本次循环，进行下次循环  同样满足标记循环的形式，默认跳出当前所在循环的本次循环，继续标记的循环
+
+21   switch-case语句
+     case 3:
+	 case 4:
+	 case 5:
+		System.out.println(x+"是春天");
+		break;
+		
+22  制表符 “\t”------>不是空格，是按表格形式对齐显示
+
+23  函数中一定有return语句：用于结束函数功能，并将结果返回给调用者
+    注意：当返回结果类型是void时，return可省略不写，但是在.class文件中会自动加上
+	
+24  相同的函数名，但是参数列表不一样，我们就把这种情况称为函数重载，这在Java中是合法的。
+    一个类中出现同名的函数，只要他们的参数个数或者类型不一样，就称之为函数的重载，overload,和返回值类型无关
+	
+25   数组的定义： ---->引用型变量，它的元素存储在堆内存中，arr指向堆内存的地址  
+		元素类型[] 数组名 = new 元素类型[元素个数或者数组长度];
+		元素类型[] 数组名 = new 元素类型[]{元素，元素，元素....};
+		元素类型[] 数组名 = {元素，元素，元素....};
+		int[] arr = new int[3]--->通过new关键字创建一个数组实体，长度是3，元素类型是int.
+		
+26  Java对内存空间的划分：
+         五部分：栈，堆，方法区，本地方法区，寄存器
+			栈内存：存储的都是局部变量，只要是在方法中定义的变量都是局部变量，一旦变量的生命周期结束，该变量就被释放   函数调用就会压栈
+			
+			堆内存：存储的都是实体（对象），每个实体都有一个首地址值，堆内存中的变量都有默认的初始化值，不同i那个的类型不一样。 int 0   double  0.0  boolean false
+			         char "u\0000"，当实体不再使用时，就会被垃圾回收机制处理
+ 
+    画图示意：int[] arr = new int[3];
+	          int[] xxx = new int[3];
+			  arr[1] = 34;
+			  xxx[0] = 89;
+			  arr = xxx;
+			  
+			  
+	           栈空间                                                                 堆空间
+	                                                                              
+																				   0		0
+																		0x0023	   1		0 ---->34
+																				   2        0
+																				   
+																				   0        0 ---->89
+																		0x0078	   1        0
+			 main																   2        0
+			 arr	0x0023 ---->0x0078
+			 xxx	0x0078 
+			 
+28  编译只是检查语法错误，生成字节文件，并不执行实际代码
+    数组不用时，只能重新赋null,因为是引用型变量 array1 = null;
+	
+	数组的长度属性： length
+	
+29  需求：定义功能，将{34,12,67}数组中的元素转换成字符串 ”[34,12,67]“
+	class Demo
+{
+	public static void main(String[] args)
+	{
+		int[] arr={13,24,56};
+        String str = toString(arr);	
+		System.out.println(str);
+	}
+	
+	public static String toString(int[] arr)
+	{
+		String temp="[";
+		for (int x=0;x<arr.length;x++)
+			if (x != arr.length-1)
+				temp=temp + arr[x] + ",";
+			else temp=temp + arr[x] + "";
+					
+		return temp;
+	}
+	
+}
+
+30  Java 帮助文档下载
+
+31  进制转换方法： Integer.toBinaryString(num)  Integer.toOctalString(num)    Integer.toHexString(num)
+
+32  数组排序方法--------->Java自带
+
+33  二维数组：int[][] arr=new int[3][4];
+
+35  int[][] arr= new int[3][2];
+    arr[0][1] = 99;
+
+    画图示意：二维数组内存情况
+			  
+			  
+	           栈空间                                                                 堆空间
+	                                                                              
+																				   0		null----->0x0030                 0       1
+																		0x0023	   1		null----->0x0040       0x0030    0       0
+																				   2        null----->0x0050
+																				                                   0x0040    0       1
+																				   0        null   依次类推                  0       0
+																		0x0078	   1        null
+			 main																   2        null                   0x0050    0       1
+			 arr	0x0023                                                                                                   0       0---->99
+			 xxx	0x0078                                              0x0095     0        null
+	                                                                               1        null
+																				   2	    null
+
+36   int[][] arr=new int[3][2];
+     System.out.println(arr);          //[[I@1db9742  [[表示二维数组，I表示数组元素整数，@分隔符，后面是数组实体的哈希值----->二维数组实体
+	 System.out.pritnln(arr[0]);       //[[I@1db9742   [表示一维数组....................................................----->一维数组实体
+	 
+37   int[][] arr=new int[3][];
+     System.out.println(arr);          //[[I@1db9742  [[表示二维数组，I表示数组元素整数，@分隔符，后面是数组实体的哈希值----->二维数组实体
+	 System.out.pritnln(arr[0]);       //[[I@1db9742   null----->一维数组不存在
+     System.out.println(arr[0][0])     //NullPointerException---->空指针
+
+	 可以重新定义：arr[0] = new int[3];
+	               arr[1] = new int[2];
+	 arr.length            arr[1].length;
+	 
+38   int[][] arr = {{},{},{},{}};    for(int a=0,b=1;a<b;a++,b--)
+
+39 Java自带数组插入元素方法---->二分查找插入法
+   import java.util.Arrays;
+   index = Arrays.binarySearch(arr,key);----->返回的索引如果是正值说明arr中存在key，且插入点角标就是index,如果inidex为负数，说明arr中不存在key，且插入点角标是
+        -1*(inedx+1);
+		
+
+Days 6		
+面向对象
+
+40  class Car{};
+    Car c = new Car();  //c是定义在主方法中的变量，为局部变量，应该放在栈内存，栈内存周期短，用完自动释放；
+	                   // new创建一个实体，本质是在堆内存开辟一块内存
+					   // Car c实体的产生是按照class Car{}的.class文件产生的。
+	
+	c.num = 4;
+	c.color = "red";
+	c.run();
+	
+	 栈空间                                                                 堆空间
+	                                                                              
+	   main																	num		0----->4                
+		c	    0x0023											0x0023	          
+																		    color    null----->"red"
+	   run()																		                                   
+	压栈，应该从下往上的，这里顺序反了;
+
+
+    class Car{};
+    Car c = new Car();
+    Car c1 = c;                //这里一个Car对象，两个引用名称，即两个指向，当c = null;即c不再指向Car()这个实体时，机制中没有垃圾，因为c1还指向。
+    c.color = "black";
+	c.run();
+	
+	栈空间                                                                 堆空间
+	                                                                              
+	   main																	num		0----->4                
+		c	    0x0023											0x0023	          
+		c1      0x0023																    color    null----->"red"
+	   c.run()
+
+41  匿名对象：没有名字的对象  new Car(),如果只调用依次方法，可以直接new Car().run;  但是每一次new Car()产生的对象都不一样，因为在下一次new时上一次的new对象已经是
+              垃圾了，没有人指向； 
+			  
+42  成员变量和局部变量的区别？
+
+		1,源代码的位置：
+		成员变量定义在类中,该变量在整个类访问有效。
+		局部变量定义在方法中,该变量只在方法内有效。
+
+		2，内存中的位置：
+		成员变量在堆内存的对象中存储。成员变量所属于对象。
+		局部变量在栈内存的方法中存储。局部变量所属于方法。
+
+		3，初始化。
+		成员变量都有默认的初始化。根据类型不同初始化值不同。
+		局部变量没有默认初始化。使用时，必须初始化才可以用。
+		
+43  封装：隐藏实现细节，对外提供公共的访问方式。
+
+	1，安全性。通过封装细节，不允许直接访问细节，并通过公共方式来访问，可以实现可控
+	2，复用性。
+	3，隔离的变化。后期应用于分层设计。
+	
+	将成员变量私有化，对外提供set get方法，对其访问的原因就是可以属性可控，数据异常时抛出异常，终止程序。
+                                               为了避免外部可以直接访问成员变量而造成安全隐患
+	私有关键字private 是一个权限修饰符，只能修饰成员(成员变量，成员函数)。   对于外部不需要知道的方法，也使用private修饰符。
+    注意：私有仅仅是封装的表现形式之一！
+	
+44  注意画出每一句执行的内存中形式   函数return就结束，从内存中移除  
+
+Days7
+46  构造函数：用于对象初始化
+    格式：函数名和类名相同    没有返回值类型   没有具体返回值    但是有return语句，控制初始化，结束构造函数
+	
+	class Person
+	{
+	  .......
+	  Person(String n)
+	  {name = n;}
+	}
+	
+	多个构造函数相当于函数重载。
+	构造函数在对象创建时调用，而且只调用一次；   构造函数用private私有化可以限制外部创建对象
+	
+47  方法作用对象是它的调用者；
+
+    定义的每一个类中，都有一个默认的空参数构造函数： 比如 Car(){},默认的控参数构造函数，专门用于创建对象初始化用的  一旦在类中自定义了创建函数，默认的构造函数
+	就没有了。
+	
+48  构造函数私有，只在本类中有效，构造函数只能被构造函数调用，不能直接被一般方法调用，构造函数之间通过关键字this来解决
+    this 代表的是对象，哪个对象调用this所在的函数，this就代表那个对象(对象的引用)
+	如：class Person{
+	   private Person(String n);
+	   Person(String n,int a)
+	   {this(n)}  	   
+	}
+	Person p = new Person();    //this指代对象p,然后this(n)就是对象初始化，即调用构造函数Person(String n);   this 跟python中self一样
+	
+
+	记住：用于调用构造函数的this语句必须定义在构造函数的第一行，因为初始化动作要先执行
+	
+	总结：只要直接被对象调用的方法都持有this引用（凡是访问了对象中的数据的方法都持有this引用）
+	
+49 class Person
+   { 
+    private String name;
+    private int age;
+	
+    Person(String name,int age)
+    {
+     name = name;    //左右两边都是局部变量，而非成员变量，相当于自己赋值给自己，因为右边name是局部变量，赋值时寻找name,优先寻找局部变量，直接找到name局部
+	 age = age;
+    }
+   }
+	Person p1 = new Person("小明",21);  ---->初始化结果p1这个对象name = null;age = 0;
+	
+	当成员变量和局部变量同名时，可以通过this关键字区分。
+	
+50  如果创建对象调用类中的的方法，发现这个方法没有使用对象中的特有数据，则该对象的创建是没有意义的，可以通过类名的方式来访问该方法，注意：用类名直接调用的方法必须
+    通过指定修饰符来修饰，就是关键字static
+	
+	静态关键字static:  成员修饰符    被静态修饰的成员，可以直接被类名所调用   静态成员优先于对象存在    静态成员随着类的加载而加载，随着类的消失而消失，生命周期很长
+	
+	注意事项：静态方法只能访问静态成员，不能访问非静态成员     静态方法中不能出现this或者super关键字  主函数是静态的
+	
+52  成员变量和静态变量区别：
+       成员变量也叫实例变量，静态变量也叫类变量    成员变量存储在堆内存的对象中，静态变量存放在方法区的静态区中   成员变量随着对象的出现出现，随着对象
+	   消失消失，静态变量随着类的出现出现，随着其消失消失。
+	
+	
+	对于对象共有的数据，可以用static修饰成员变量，这样就不用存储在每一个对象中，可以直接通过类名来调用。
+	
+53  静态代码块：随着类的加载而执行，而且只执行一次
+    作用：给类进行初始化   构造函数是给对象初始化
+
+  class StaticCode
+  {
+    static  //静态代码块
+	{
+	  System.out........
+	}
+	
+	static void show()
+	{
+	 .......
+	}
+  }  
+  
+54  构造代码块：给所有对象进行初始化，构造函数只给对应的对象初始化
+    类中独立的代码块{},称为构造代码块，每次new对象都会运行一次
+	
+55 创建一个对象流程：
+   1  加载指定的字节码文件进内存（.class文件）
+   2  通过new在堆内存中开辟空间，分配首地址
+   3  对对象中的属性进行默认初始化
+   4  调用与之相对应的构造函数，构造函数压栈
+   5  构造函数中执行隐式的语句super()访问父类中的构造函数
+   6  对属性进行显示初始化（即类语句中int age = 21之类）
+   7  调用类中的构造代码块
+   8  执行构造函数中自定义的初始化代码
+   9  初始化完毕，将地址赋值给指定的引用
+   
+56  局部代码块：可以控制局部变量的生命周期
+    class Demo
+	{
+	 public static void main(String[] args)
+	 {
+	   Person p = new Person();
+	   
+	   {//局部代码块
+	   int x = 3;  /// 只在这个局部代码块中有效
+	   }
+	 }
+	}
+
+Days8	
+57  单例设计模式：
+    解决的问题：保证一个类的对象在内存中的唯一性
+	应用场景：多个程序都在操作同一个配置文件，需要程序A操作后的结果，程序B要知道并继续基于A操作后的结果进行操作
+	    前提：要求数据都存储在配置文件对象中，程序A和B操作的配置文件对象是同一个
+		
+	思路：
+	1  问题是其他程序都可以通过new创建该类的对象，无法控制数量------>不让其他程序new对象
+	2  在本类中自己new一个本类对象，可以控制数量
+	3  对外提供让其他程序获取该对象的方式
+                                            
+    步骤：
+    1  将类中的构造函数私有化
+    2  在本类中new一个对象
+    3  定义一个方法返回该对象	
+	
+	延迟加载和非延迟加载两种方法
+	
+58  这里是单继承：extends:继承------>当子类具备父类的所有共性时，才可以用继承
+
+    对于父类中私有的部分，子类不具备访问权限，但是子类中同样继承该私有部分
+
+    当子父类中出现同名成员变量，用关键字super来区分：super.name---->父类中name成员变量
+
+    super关键字：
+       super关键字的用法和this相似。
+
+       this代表的是当前对象。
+       super代表的是父类中内存空间。
+
+       子父类中不会出现同名属性的情况。
+
+    
+	继承中，成员函数的特点。
+
+    特殊情况：
+       子父类中出现了一模一样（返回值类型，函数名，参数列表都一样，才叫覆盖）的方法，创建子类对象调用该方法时，运行的是子类中的方法。-------->子类对父类的功能
+	   进行更新和扩展            这种情况称之为函数的另一个特性----覆盖(override)重写 复写。
+
+
+    继承的覆盖使用注意事项：
+
+      1，子类覆盖父类权限必须大于等于父类的权限。  public private 默认没有关键字修饰也是一种权限，介于public和private之间
+      2，覆盖中，静态只能覆盖静态，或者被静态覆盖。
+	   
+
+59    子父类中的构造函数的特点。
+
+		创建子类对象，父类中的构造函数也运行了。
+		为什么呢？
+		其实在子类的所有构造函数中的第一行，都有一句默认的super();在调用父类中的空参数构造函数。
+		为什么子类实例化都必须去父类中的初始化呢？
+		因为子类继承了父类，只有了父类中的内容，所以子类在实例化使用父类中的内容之前，
+		必须要先明确父类是如何对自己的内容进行初始化的，
+		所以子类的构造函数都会默认访问父类中空参数的构造函数。通过super();
+
+		如果父类中没有空参数的构造函数时，子类的构造函数必须通过显示定义super语句指定要访问的父类中的构造函数、
+		
+		用来访问父类构造函数的super语句在子类构造函数中必须放在第一行，因为父类初始化要先完成
+
+
+		this()和super();都必须出现在构造函数的第一行。----------->子类初始化一定要有super语句访问父类构造函数
+		为什么都必须出现的第一行呢？因为初始化的动作要先执行
+
+60   final关键字。最终。
+
+		1，final修饰类，函数，变量。
+		2，final修饰的类不可以被继承。
+		3，final修饰的方法不可以被覆盖。
+		4，final修饰的变量是一个常量，只能被赋值一次。
+		
+		当使用的数据不变时，定义阅读性强的变量来表示数据，并将其final化，final修饰的名称规范：大写，用_连接
+
+        static final int num = 5;//final 化的最终结果是显示的初始化值，所以后面必须跟上显示初始化语句，放在静态区存储
+
+Days9
+
+61    抽象的特点：
+		1，抽象方法没有方法体，必须由抽象关键字所修饰。
+		2，抽象方法一定存在于抽象类中，必须由抽象关键字所修饰。
+		3，抽象类不可以实例化。因为调用抽象方法没意义。
+		4，子类必须覆盖抽象类的所有抽象方法后，子类就可以实例化。否则该子类还是抽象类。	
+
+        抽象方法一定定义在抽象类中，都需要abstract来修饰   抽象类不能实例化，不能用new关键字来创建对象   只有子类覆盖了所有抽象方法后，子类才能具体化，创建对象
+        否则子类也是抽象类  
+
+        抽象类也是不断向上抽取而来，抽取了方法的声明而不确定具体的方法内容，由不同的子类来完成具体的方法内容
+
+
+     抽象类的常见问题：
+
+		1，抽象类一定是父类吗？
+			是的，因为只有子类覆盖了抽象类中的方法，才可以创建对象，去使用这些方法。
+
+		2，抽象类中有构造方法吗？
+			有，因为父类的构造函数可以给子类对象初始化。 抽象类有子类，它的构造函数可以给子类的对象实例化
+			
+
+		3，抽象类中可以不定义抽象方法吗？
+			  可以的，仅仅是让该类不能创建对象
+			
+			其实抽象类和一般类都是用来描述事物的。都有具体的属性和行为。
+			不同之处：
+			抽象类中可以定义抽象类方法。但是不能实例化。
+			一般类中不可以定义抽象方法，但是可以实例化。
+
+
+			没有抽象方法的抽象类的出现，仅仅是不让该类创建对象。
+
+
+		4，抽象关键字不可以和哪些关键字共存呢？
+			final: final修饰的类不能被继承  abstract抽象类一定要继承   final修饰的方法不能被复写，抽象方法一定要复写
+			private:方法私有后，子类就无法覆盖抽象方法
+			static:	静态修饰的方法可以通过类名来调用，而抽象方法调用是没有意义的
+			
+62      如果抽象类中所有方法都是抽象方法，初期我们可以认为这样的抽象类就是接口
+        接口定义： 
+		    interface Inter
+			{
+			  public static final NUM = 4;  ------>就算你不写修饰符，生成class文件里面也会自动补全
+			  public abstract void show1();      ---->javac编译之后，生成Inter.class文件
+			  public abstract void show2(); ------>修饰符也可以不写
+			}
+			
+			接口是用来被实现的：implements
+			class Test implements Inter
+			{
+			   public void show1(){};
+			   public void show2(){};
+			}
+			
+			接口中的成员和class定义的不同之处：  接口中常见的成员有两种---->全局常量和抽象方法，而且都有固定的修饰符，成员都是public修饰的	
+			
+			特点：
+				1，接口不可以实例化。
+				2，接口的子类必须覆盖接口中所有的抽象方法后，该子类才可以实例化。否则该子类是抽象类。
+				
+63   Java中不直接支持多继承，会产生调用的不确定性，原因在于方法主体内容不同，Java对该机制进行改良------>通过接口来解决：将多继承转换为多实现
+     interface InterA
+	 {
+	    public abstract void show1();
+	 }
+	 interface InterB
+	 {
+	    public abstract void show2();
+	 }
+	 class SubInter implements InterA,InterB
+	 {
+	    public void show1()
+		{System.out.println("inter show1");}
+		
+		public void show2()
+		{System.out.println("inter show2");}
+	 }
+	 
+	 SubInter s = new SubInter();
+	 s.show1();
+	 s.show2();
+	 
+	 假如接口中有多个相同的方法，调用时也不会产生调用的不确定性，因为方法主体是在类中覆盖的，调用时直接调用类中覆盖的方法主体，接口只提供功能，不提供功能
+  具体内容
+  
+     类在继承类同时，还可以实现多个接口        继承是为了获得体系的基本功能，要想扩展功能可以通过接口实现    接口与接口之间可以继承，而且支持多继承
+	 
+64  接口中定义了多个功能，我们只需要调用 其中一个功能时，由于只有子类全部覆盖接口中方法才能创建对象，所以我们利用没有抽象方法的抽象类来空实现接口中所有
+    方法，方便创建接口对象
+	interface InterA
+	{
+	   public void show1();
+	   public void show2();
+	   public void show3();
+	}
+	abstract class Test implements InterA  //抽象类，防止创建对象------>利用构造函数私有化也可以实现防止外界创建对象，但是这样继承它的子类也就不能调用它的构造函数
+	                                       //进行初始化了，所以只能通过abstract方法来实现。
+	{
+	   void show1(){};
+	   void show2(){};
+	   void show3(){};
+	}
+	class DemoA extends Test
+	{
+	   void show1()
+	   {
+	      System.out.pritnln("......")
+	   }
+	}
+	
+65    接口的思想
+          笔记本电脑USB接口
+			1，接口是对外提供的规则,接口其实就是暴露出来的规则
+			2，接口的出现提高功能的扩展性。
+			3，接口的出现降低了耦合性。 解耦。
+	   接口的出现：一方在使用接口，一方在实现接口（比如电脑在使用接口，USB鼠标则是实现了接口）
+	   有了接口，我们不用去关心实现接口的具体对象，我们关注的目标只要是接口就行了
+	   
+66  抽象类和接口：
+		extends: is a             implements: like a      从问题领域(实际意义)和功能领域(代码实现)考虑问题
+		类用于描述的是事物的共性基本功能
+		接口用于定义的都是事物的额外功能
+		
+67  多态：多种形态
+      这里是对象的多态------>面对基本功能时，使用对象的多态更方面，不用面对具体的对象
+	  abstract class Animal
+	  {
+	    .....
+	  }
+	  class Dog extends Animal
+	  {
+	     .......  
+	  }
+	  Dog x = new Dog();
+	  Animal x = new Dog();//狗实例既是狗类型，也是动物类型，多态性----->向上转型，Dog被提升为Animal,好处：隐藏了子类型，提高代码扩展性
+	                       //弊端：不能使用子类中的功能，只能使用父类中的功能
+						   如果不用面对子；类型，父类型的功能就能完成，提高代码扩展性，就使用向上转型
+	 如果要使用子类中特有的功能：
+	 Dog d = Dog(a);        //称为向下转型 好处：可以使用子类的特有功能，但是必须要面对子类型，向下转型有风险
+	 向下转型的风险是：可能发生ClassCastException,只要转换类型和对象类型不匹配就发生
+	 想要转换安全，必须进行判断，需要关键字insdtanceof  对象 instanceof 类型
+	 比如：Animal a = Cat();
+	       Dog d = (Dog)a;//ClassCastException
+	 应该：if(a instanceof Dog)
+		   
+	  
+	  多态在程序中的体现：父类的引用或者接口的引用指向子类的对象，提高了代码的扩展性，后期出现的功能，可以被之前的程序所执行
+	  多态的弊端：虽然可以使用后期出现的代码，但是不能使用子类特有的功能。只能使用覆盖了父类的功能。
+	  多态的前提：必须要有关系(继承，实现)，通常会有覆盖操作。
+			
+	  
+				
+Day10
+68  class 毕姥爷       多态性
+		{
+			void 讲课()
+			{
+				System.out.println("管理");
+			}
+			void 钓鱼()
+			{
+				System.out.println("钓鱼");
+			}
+		}
+
+		class 毕老师 extends 毕姥爷
+		{
+			void 讲课()
+			{
+				System.out.println("java");  -------->子类方法覆盖了父类的讲课方法
+			}
+			void 看电影()
+			{
+				System.out.println("看电影");
+			}
+		}
+
+
+
+		class DuoTaiDemo3 
+		{
+			public static void main(String[] args) 
+			{
+				毕姥爷 x = new 毕老师();----->毕老师子类伪装成毕姥爷
+				x.讲课();-------------------->父类方法被覆盖，调用的是子类的方法
+				x.钓鱼();
+		//		x.看电影();//不行，因为毕姥爷没有方法。
+				
+				毕老师 y = (毕老师)x;
+				y.看电影();
+
+
+				//多态至始至终都是子类对象（new 毕老师()）在做着类型的变化。
+
+
+			}
+		}
+		
+69    多态中对成员的调用
+      1 成员变量：当子父类中出现同名的成员变量时，多态调用时，只看调用该成员变量的引用所属的类中的成员变量（编译运行时）。
+	  2 成员函数：子父类中出现一模一样的函数时，多态调用：编译时看的是引用变量所属的类中的方法，运行时看的是对象所属的类中的方法，子类默认继承父类中方法
+	              成员方法动态绑定到当前对象上。
+	  3 静态函数：当出现一模一样的函数时，多态调用，编译和运行时看引用变量所属的类中的方法，实际中真正调用静态方法是不需要对象的，直接类名调用。
+	               因为静态方法绑定到类上。
+				   
+70  Object类，所有类的父亲，其中定义了所有对象都具备的功能---------->查看Java源代码，Api文档
+
+    定义一个方法，判断两个Person对象是否是同一个人，判断的依据是根据年龄，如果年龄相同，视为同一个人，不用再自定义方法，因为object父类中已经定义了这样的
+	判断方法，但是判断的内容是根据Person的特点定义的，所以需要保留父类的功能声明，定义子类功能特有内容，也就是使用覆盖
+	
+	class Person extends Object
+	{
+	   private int age;
+	   public boolean equals(Object obj)------>覆盖Object中定义的equals方法//Object obj = p2;--->Object obj = new Person:多态中的向上转型
+	   {  
+	      //提高点效率，如果两个引用指向同一个对象，不用再转换
+		  if (this ==obj)
+		     return true
+	      if (!(obj instanceof Person))
+		     return flase;//throw new ClassCastException("类型转换错误")
+	      
+	      //obj.age是错误的，因为Object中没有age属性
+		  //想使用子类对象的特有属性或者行为，必须对其进行向下转型
+		  Person p = (Person) obj;
+	      return this.age == obj.age;
+	   }
+	}
+	
+	class ObjectDemo
+	{
+	  public static void main(String[] args)
+	  {
+         Person p1 = new Person();
+         Person p2 = new Person();
+		 System.out.println(p1.equals(p2));------>如果改成：System.out.println(p1.equals(new Demo())),编译会报错：ClassCastException,所以equals
+		                                           方法要进行类型判断
+		//如果判断姓名字符串是否相同，不要用==，字符串本身就是一个对象，有比较方法
+		return this.name.equals(p.name) && this.age == p.age
+		 System.out.println(p1 == p2);
+	  }
+	}
+	
+71  public String toString():返回该对象的字符串表示，通常toString方法会返回一个“以文本方式表示”此对象的字符串，结果应是简明的信息表达式，建议所有子类
+    重写此方法。
+	
+	Object类中toString返回一个字符串，该字符串由类名（对象是该类的一个实例），@标记分隔符，后面是此对象哈希码的无符号十六进制表示
+	
+	建立Person对象特有的对象表现形式，重写toString：
+	public String toString()
+	{
+	  return  "Person[name = "+this.name+",age = "+this.age+"]";
+	}
+	System.out.println(Person)==System.out.println(0.toString())
+
+72  内部类：定义在类中的类，称为内部类。  Outer$Inner.class:Outer类中的内部类Inner
+
+	好处是可以直接访问外部类中的成员。
+
+
+	外部类要访问内部类需要创建内部类的对象。
+
+	内部类直接访问外部类的原理：因为内部类持有了外部类的引用。外部类名.this
+	
+	class Outer
+	{
+	  private int num = 4;
+	  class Inner//内部类。相当于外部类的成员，可以被成员修饰符修饰：public private static 
+	  {
+	   void show()
+	   {
+	     System.out.println(num);
+	   }
+	  }
+	}
+	  非静态非私有的内部类访问方式：------------->在非静态的内部类中，只允许定义静态的常量，不能定义其他静态成员
+	 ///如果内部类的权限是非私有的，就可以在外部其他程序中被访问到，通过创建外部类对象完成------>外部类加载时，内部类一起加载，但是内部类内容不加载
+	 Outer.Inner in = new Outer().new Inner();//创建的是内部类
+	 in.show();
+	 
+	 静态，非私有的内部类访问方式，访问非静态成员------->外部类加载，内部类同时也加载，但是内部类的 内容不加载
+	 //Outer.Inner in = new Outer.Inner();
+	   in.show();                              ------>静态内部类相当于一个外部类
+	 
+	 静态，非私有的内部类访问方式，访问静态成员----->外部类加载同时内部类也加载，同时内部类内容也加载
+	 Outer.Inner.show()
+	 
+73  之前的this，都是对应类名.this，只是省略了外部类名
+    class Outer
+	{
+	 int num = 2;
+	 class Inner
+	 {
+	  int num = 3;
+	  void show()
+	  {
+	    int num =4;
+		System.out.println(num)---->访问局部变量4
+		System.out.println(this.num)------>访问内部类持有的this引用指向的对象中的成员，即Inner.this.num = 3
+		System.out.println(Outer.this.num)------->访问外部类持有的this引用指向的对象中的成员，即2；
+	  }
+	 }
+	 void method()
+	 {
+	   new Inner().show();
+	 }
+	}
+	
+	class Demo
+	{
+	  ......
+	  new Outer().method();
+	}
+	
+74  Outer$Inner.class:成员内部类    Outer$1Inner.class:带编号，局部内部类
+
+75  /*
+	匿名内部类：就是内部类的简化格式。
+	内部类必须继承或者实现外部的类或者接口，这种情况下的内部类可以简化成匿名内部类
+
+	格式：new 父类或者接口(){定义子类的内容}
+	其实匿名内部类就是一个子类对象。
+	*/
+    abstract class Demo
+	{
+	  abstract void show();
+	}
+	class Outer 
+	{
+	  private int num = 4;
+	  /*
+	  class Inner extends Demo
+	  {
+	   //复写
+	   public void show()
+	   {
+	     System.out.println("show.."+num);
+	   }
+	  }
+	  */
+	  public void method()
+	  {
+	   //new Inner().show();
+	   new Demo()-------->匿名内部类
+	   {
+	     //覆盖Demo中的抽象方法
+		 public void show()
+		 {
+		   System.out.println("show...."+num);
+		 }
+	   }.show();///----->调用子类中show方法
+	  }
+	}
+	
+Days 11
+
+76 异常：java程序在 运行 时期发生的不正常情况(问题)。
+
+	java就按照面向对象的思想对不正常情况进行描述和对象的封装。
+
+	问题分两种：
+	Throwable:定义了对于问题的共性的功能。
+		|--Error:由系统底层发生的，告诉jvm，jvm告诉使用者。不做针对性处理。直接修改代码。
+		|--Exception:jvm发生，并告诉给使用者。可以进行针对性的处理。
+		
+    int[] arr = new int[1];
+	System.out.println(arr[1]);///输出语句发生问题时，JVM就将这个已知的问题封装成对象 throw new ArryIndexOutOFBoundsException(1);将问题抛给调用者main函数。mian
+	                          ///函数没有针对性的处理方式，main就继续往外抛给调用者JVM,JVM就使用默认的处理方式，将问题的名称+信息+位置在控制台上显示出来，让
+							  ///调用者看到并结束程序。
+							  
+77 异常的处理。
+
+	两种：
+	1，遇到问题不进行具体的处理，而是继续抛给调用者。
+		其实就是在函数上通过throws关键字声明异常。告诉调用者处理。  
+		class c1
+		{
+		  int div(int a,int b)  throws Exception(通过throws抛出声明异常)---->抛给调用者main函数
+		  {
+		    return a/b
+		  }
+		}
+		class Demo
+		{
+		  public static void main(String[] args)  throws Exception----->main函数处理异常方式：继续抛给上层调用者
+		  {
+		     c1 c = new c1();
+			 int num = c.div(4,0);
+			 System.out.println(num);
+		  }
+		}
+
+
+	2，针对性的处理方式：捕获！
+	try
+	{
+		//有可能发生异常的代码。
+	}
+	catch(异常类  变量)
+	{
+		//这是真正的捕获，处理异常的代码;
+	}
+	finally
+	{
+		//一定会被执行的代码。
+	}
+	
+	class Demo
+	{
+	   int div(int a,int b) throws Exception
+	   {
+	     if(b==0)
+			throw new ArithmeticException("除零了，废了！");//抛出异常对象。自定义异常
+		 return a/b;   //throw new ArithmeticException("/by zero");
+	   }
+	}
+	class ExceptionDemo
+	{
+	  public static void main(String[] args)
+	  {
+	    Demo d = new Demo();
+		try
+		{
+		  int num = d.div(4,0);
+		  System.out.println("num="+num);
+		}
+		catch (Exception e)
+		{
+		  //Exception e = new ArithmeticException("/by zero"). 多态，Exception父类
+		  
+		  //处理这个对象。可以使用该对象的方法。
+			System.out.println("异常啦！");
+			System.out.println(e.getMessage());//异常信息
+			System.out.println(e.toString());//异常名称+异常信息
+			e.printStackTrace();//名字+信息+位置。jvm默认处理收到异常就是调用这个方法。将信息显示在屏
+		}
+		System.out.println("over");
+	  }
+	}
+	
+78  throw和throws有什么区别呢？
+
+	1，位置不同。
+	throws用在函数上，后面跟的是异常类，可以跟多个。
+	throw用在函数内，后面跟的是异常对象。
+
+	2，功能不同。
+	throws用来声明异常，让调用者只知道该功能有可能出现的问题，并由调用者可以给出预先的处理方式。
+	throw抛出具体问题对象。执行到throw功能就已经结束了，跳转到调用者。并将具体的问题对象也抛给调用者。
+
+	也就说throw语句独立存在时，下面不要定义其他语句。因为执行不到。
+	
+	异常体系的特殊情况：
+	Excpetion
+		|--Error
+		|--Exception
+	异常体系最大的特点就是体系中的类以及类产生的对象，都具备这可抛性，可抛性的意思是可以被throws和throw所操作。
+	
+79   异常的原则：
+		1，功能内部有异常throw抛出，功能上一定要throws声明。
+			内部抛什么，功能上就声明什么。
+			声明的目的就是为了让调用者处理，如果调用者不处理，编译失败。
+
+		2，特殊情况:
+			当函数内通过throw抛出了RuntimeException及其子类的异常对象时，函数上可以不用throws声明。
+			不声明的目的就是不让调用者处理。让调用者的程序停止。要对代码进行修改。
+
+
+			Exception分两种：
+			1，编译时会被检测的异常。
+			2，运行时异常(编译时不检测)RuntimeException
+			
+80  /*
+	在自定义的程序中，如果有了问题。也可以像java中的异常一样。
+	对问题进行描述。
+
+	举例：
+	定义一个功能可以实现除法运算。但是除数不可以为负数。
+    */
+	//将负数为除数的问题描述,自定义异常。
+	class FuShuException extends RuntimeException
+	{
+		private int num;
+		FuShuException()
+		{
+			super();
+		}
+		FuShuException(String message)
+		{
+			super(message);
+		}
+		FuShuException(String message,int num)
+		{
+			super(message);
+			this.num = num;
+		}
+
+	}
+
+
+	class Demo
+	{
+		int div(int a,int b)
+		{
+			if(b<0)
+				throw new FuShuException("负数不可以作为除数",b);
+
+			if(b==0)
+				throw new ArithmeticException(" 被零除了。");
+
+			return a/b;
+		}
+	}
+	
+81  异常转换：针对不同对象封装不同问题对象，封装不应该暴露出去的异常问题，转换成外部对象可以处理的异常再暴露.
+
+82     /*
+		try
+		catch
+		finally
+
+
+		finally作用的是：无论是否有异常发生，都要对资源进行释放。
+		资源释放动作就定义在finally代码块中。
+		*/
+
+
+		class ExceptionDemo5 
+		{
+			public static void main(String[] args) 
+			{
+				try
+				{
+					int num = 4/0;
+					System.out.println("num="+num);
+				}
+				catch (Exception e)
+				{
+					System.out.println(e.toString());
+		//			return ;----->退出函数，"over"打印语句不会执行
+		//			System.exit(0);//退出jvm。只有这种情况，finally也不执行。
+				}
+				finally
+				{
+					System.out.println("finally");
+				}
+				
+				System.out.println("over");
+
+			}
+		}
+
+83   一个try多个catch，一般对应的是被调用的函数，抛出多个异常的情况。分别处理。注意：在多catch语法上特殊的地方，如果catch中的异常类存在子父类。
+     父类的catch一定要放子类的下面。否则编译失败。
+	 
+	 不一定要处理异常，但是有资源需要释放。 try{} finally{}
+	 
+84      /*
+		Exception
+			|--AException
+				|--AAException
+			|--BException
+
+
+		覆盖时：
+		子类方法覆盖父类方法只能抛出父类方法异常或者该异常的子类。
+		如果父类方法抛出多个异常，子类只能抛出父类异常的子集
+		原则：就是子类的异常必须要在父类的异常处理控制中。
+
+
+		注意：有一种情况，只能try不能throws。
+		被覆盖的方法没有抛出异常。
+		那么子类在覆盖时，子类方法中发生了异常，就只能try 无法throws声明。
+
+		interface Inter
+		{
+			void show();
+		}
+		class Demo implements Inter
+		{
+			public void show()
+			{
+				try
+				{
+					throw new Exception();
+				}
+				catch(Exception e)
+				{
+					throw new RuntimeException("");//将编译时检测异常，转换成运行时异常。这样就不用声明。
+				}
+			}
+		}
+		*/
+
+
+		class AException extends Exception
+		{
+		}
+		class BException extends Exception
+		{
+		}
+		class AAException extends AException
+		{
+		}
+
+		class Fu
+		{
+			void show()throws AException
+			{
+				System.out.println("fu show");
+			}
+		}
+
+		class Zi extends Fu
+		{
+			void show()throws BException------>无法处理，只能抛出AException或者AAException
+			{
+				
+				System.out.println("zi show");
+			}
+		}
+
+
+		class Tool
+		{
+			void method(Fu f)
+			{
+				try
+				{
+					f.show();
+				}
+				catch (AException e)
+				{
+				}
+			}
+		}
+
+		class ExceptionDemo7 
+		{
+			public static void main(String[] args) 
+			{
+				Tool t = new Tool();
+				t.method(new Zi());
+			}
+		}
+		
+85  包：
+    package mypack;----->包定义要放在源代码的首部,包名称小写
+    class PackageDemo
+	{
+	  public static void main(String[] args)
+	  {
+	    System.out.println("Hello package!");
+	  }
+	}-------->javac 回车，显示javac命令的相关选项   javac -d 目录 PackageDemo---->编译时将.class文件放到指定目录下的mypack文件夹里
+	--------->运行.class文件时，  set classpath = 目录(包所在目录)  java mypack.PackageDemo,即运行程序
+	
+86      包之间访问
+        /*
+		问题1：
+		PackageDemo.java:10: 错误: 找不到符号
+						DemoA d1 = new DemoA();
+						^
+		  符号:   类 DemoA
+		  位置: 类 PackageDemo
+		PackageDemo.java:10: 错误: 找不到符号
+						DemoA d1 = new DemoA();
+									   ^
+		  符号:   类 DemoA
+		  位置: 类 PackageDemo
+		2 个错误
+
+		原因：类名写错。有了包以后，类的名称应该是：包名.类名
+
+
+		--------------------
+		问题2：
+		PackageDemo.java:10: 错误: 程序包packa不存在
+						packa.DemoA d1 = new packa.DemoA();
+							 ^
+		PackageDemo.java:10: 错误: 程序包packa不存在
+						packa.DemoA d1 = new packa.DemoA();
+												  ^
+		2 个错误
+
+		原因：packa包没有存放在当前当前目录下。需要告诉jvm它的位置。
+		解决：设置classpath。
+
+		--------------------
+
+		PackageDemo.java:10: 错误: DemoA在packa中不是公共的; 无法从外部程序包中对其进行
+		访问
+						packa.DemoA d1 = new packa.DemoA();
+							 ^
+		PackageDemo.java:10: 错误: DemoA在packa中不是公共的; 无法从外部程序包中对其进行
+		访问
+						packa.DemoA d1 = new packa.DemoA();
+												  ^
+		2 个错误
+
+		原因：被访问的包中的类，权限不够。
+		解决：被访问的包中的类，用public修饰。
+		-------------
+
+		PackageDemo.java:11: 错误: show()在DemoA中不是公共的; 无法从外部程序包中对其进行
+		访问
+						d1.show();
+						  ^
+		1 个错误
+
+		被访问的方法也必须是public。
+		
+		public		protected		default		private
+	同一个类中	  ok			ok				ok			ok
+	同一个包中    ok			ok				ok			
+	子类		  ok			ok			
+	不同包中	  ok
+
+	包与包之间只有两种权限可以用，public protected(只给子类使用,修饰之后，只有子类可以使用)
+	
+87  import packa.DemoA;//导入了packa包中的DemoA类。简化类名的书写。
+    import packa.haha.*;//导入packa包中haha子包中的类。-------->import导入的是包中的类，不能导入包
+
+    //当不同包中的类重名了。这时即使导入了，也必须在使用时明确该类的包名、
+	
+	set classpath = ''   set classpath:查看classpath存储内容
+	
+88  jar:java的压缩包。  使用jar.exe程序
+    设置.class文件路径在.jar压缩包下，使用set classpath = '';
+	
+	
+Days13
+89 进程：就是应用程序在内存中分配的空间。(正在运行中的程序)
+	
+   线程：是进程中负责程序执行的执行单元。也称为执行路径。
+	     一个进程中至少有一个线程在负责该进程的运行。
+	     如果一个进程中出现了多个线程，就成该程序为多线程程序。
+		 
+   举例：运动场--鸟巢。水立方。
+
+   多线程技术：解决多部分代码同时执行的需求。合理的使用cpu资源。
+   
+    多线程的运行根据cpu的切换完成的。怎么切换cpu说的算，
+	所以多线程运行有一个随机性(cpu的快速切换造成的)。
+
+	jvm中的多线程。
+	至少有两个线程：一个是负责自定义代码运行的。这个从main方法开始执行的线程称之为主线程。
+				    一个是负责垃圾回收的。
+
+	通过实验，会发现每次结果不一定相同，因为随机性造成的。
+
+	而且每一个线程都有运行的代码内容。这个称之为线程的任务。
+	之所以创建一个线程就是为了去运行制定的任务代码。
+
+	而线程的任务都封装在特定的区域中。
+	比如：
+	主线程运行的任务都定义在main方法中。
+	垃圾回收线程在收垃圾都会运行finalize方法。------>垃圾回收方法每个类都会使用，所以是定义在Object类中的，可以去java.lang包中查找，应该是定义在每个类中。
+	
+	class Demo
+	{
+		//定义垃圾回收方法。（覆盖Object中的方法，在垃圾回收器启动时自动调用）
+		public void finalize()
+		{
+			System.out.println("demo ok");
+		}
+	}
+
+	class  FinalizeDemo
+	{
+		public static void main(String[] args) ----->主线程
+		{
+
+			//System.gc();//启动垃圾回收器。---->垃圾回收线程随着主线程的结束而结束，所以在这启动的话，主线程瞬间利用资源输出，然后垃圾回收来不及清理就结束了
+			new Demo();
+			new Demo();
+			new Demo();
+			System.gc();//启动垃圾回收器。
+			System.out.println("Hello World!");
+		}
+	}
+	
+90  /*------>垃圾回收线程一般JVM会自动创建，我们不用去关心
+	如何建立一个执行路径呢？
+
+	通过查阅api文档 java.lang.Thread类。
+	该类的描述中有创建线程的两种方式：
+	1，继承Thread类。
+		1，继承Thread类。
+		2，覆盖run方法。
+		3，创建子类对象就是创建线程对象。
+		4，调用Thread类中的start方法就可以执行线程。并会调用run方法。
+
+		start()开启线程后，都会执行run方法。说明run方法中存储的是线程要运行的代码。
+		所以，记住，自定义线程的任务代码都存储在run方法中。    主线程中的任务在main中定义
+
+	调用start和调用run方法的区别？--------->start()方法不能覆盖，一旦覆盖，再调用start()时就不再是多线程,就成了单一的主线程
+		调用start会开启线程，让开启的线程去执行run方法中的线程任务。
+		直接调用run方法，线程并未开启，去执行run方法的只有主线程。-------->Thread.currentThread().getName()获得的是运行当前线程的执行路径的对象引用的名字
+		                                                                   而getName()方法获得的是当前对象的名字，也就是:继承Thread类的每一个子类创建线程对象
+																		   都会取名字，thread-0之类的，调用getName()方法获得的就是这个名字。
+		
+91  多次启动一个线程是非法的，会抛出IllegalThreadStateException异常
+
+92   比如火车站卖票：卖票的代码需要被多个线程执行(多窗口同时卖票)，所以要将这些代码定义在线程任务中。run方法。创建四个线程。会创建400张票。不合适，不建议票变成
+         静态的，所以如何共享这100张票。需要将资源和线程分离。  //到api中查阅了第二创建线程的方式。
+		 
+	 
+	 创建线程的第二种方式。实现Runnable接口.
+		1，定义一个类实现Runnable。
+		2，覆盖Runnable接口中的run方法，将线程要运行的任务代码存储到该方法中。
+		3，通过Thread类创建线程对象，并将实现了Runnable接口的对象作为Thread类的构造函数的参数进行传递。------>线程创建的同时会自动执行符合Runnable接口的任务对象
+		4，调用Thread类的start方法，开启线程。
+		
+	 实现Runnble接口的好处：
+		1，避免了继承Thread类的单继承的局限性。
+		2，Runnable接口出现更符合面向对象，将线程单独进行对象的封装。
+		3，Runnable接口出现，降低了线程对象和线程任务的耦合性。
+		所以，以后创建线程都使用第二种方式。
+	
+93  多线程的安全问题。
+
+    产生的原因：
+		1，线程任务中有处理到共享的数据。
+		2，线程任务中有多条对共享数据的操作。----->对共享数据操作的代码进行同步
+
+
+    解决的思想：
+		只要保证多条操作共享数据的代码在某一时间段，被一条线程所执行，
+		在执行期间不允许其他线程参与运算。
+
+
+		咋保证呢？
+		用到了同步代码块。
+		synchronized(对象)
+		{
+			需要被同步的代码。
+		}
+
+		同步在目前情况下保证了一次只能有一个线程在执行。其他线程进不来。
+		这就是同步的锁机制。
+				
+		有可能出现这样一种情况：
+			多线程安全问题出现后，加入了同步机制，没有想到，安全问题依旧！咋办。
+
+			这时肯定是同步出了问题。
+
+			只要遵守了同步的前提，就可以解决。
+
+			同步的前提：
+				多个线程在同步中必须使用同一个锁。这才是对多个线程同步。
+				
+Day14 
+
+94 两个储户，到同一个银行存钱，每个人存了3次，一次100元。
+	1，描述银行。
+	2，描述储户任务。
+
+	分析多线程是否存在安全隐患。
+
+	1，线程任务中是否有共享的数据。
+	2，是否多条操作共享数据的代码。  
+	 class Bank
+	{
+		private int sum;
+		private Object obj = new Object();
+		public void add(int n)
+		{
+			synchronized(obj)
+			{
+				sum = sum + n;
+				try
+				{
+					Thread.sleep(10);
+				}
+				catch (Exception e)
+				{
+					
+				}
+				System.out.println("sum="+sum);
+			}
+			
+		}
+	}
+
+	class Customer implements Runnable
+	{
+		private Bank b = new Bank();
+		public void run()
+		{
+			for (int x = 0;x<3;x++)
+			{
+				b.add(100);
+			}
+		}
+	}
+
+	class Demo
+	{
+		public static void main(String[] args)
+		{
+			Customer c = new Customer();
+			Thread t1 = new Thread(c);
+			Thread t2 = new Thread(c);
+			t1.start();
+			t2.start();
+		}
+		
+	}
+	
+    同步函数。其实就是在函数上加上了同步关键字进行修饰。
+    同步表现形式有两种：1，同步代码块，2，同步函数。
+
+	同步函数使用的锁是什么呢？函数需要被对象调用，哪个对象不确定，但是都用this来表示。
+	同步函数使用的锁就是this。
+	
+	验证同步函数使用的锁是this。
+
+	验证需求：
+	启动两个线程。
+	一个线程负责执行同步代码块(使用明锁)。
+	另一个线程使用同步函数(使用this锁)。
+	两个执行的任务是一样的都是卖票。如果他们没有使用相同的锁，说明他们没有同步。会出现数据错误。
+
+	怎么能让一个线程一直在同步代码块中，一个线程在同步函数呢？
+	可以通过切换的方式。
+	*/
+
+	class SaleTicket implements Runnable
+	{
+		private int tickets = 100;//private static int tickets = 100;
+		//定义一个boolean标记。
+		boolean flag = true;
+		Object obj = new Object();
+		public void run()
+		{
+			if(flag)		
+				while(true)
+				{
+					synchronized(this)//synchronized(ThisLockDemo.class)
+					{
+						if(tickets>0)
+						{	
+							try{Thread.sleep(10);}catch(InterruptedException e){}//让线程到这里稍微停一下。
+							System.out.println(Thread.currentThread().getName()+"....code....."+tickets--);
+						}
+					}
+				}
+			else
+				while(true)
+					sale();
+		}
+
+		public synchronized void sale()//public static synchronized void sale()
+		{
+			if(tickets>0)
+			{	
+				try{Thread.sleep(10);}catch(InterruptedException e){}//让线程到这里稍微停一下。
+				System.out.println(Thread.currentThread().getName()+".....func...."+tickets--);
+			}
+		}
+	}
+
+
+
+	class ThisLockDemo 
+	{
+		public static void main(String[] args) throws InterruptedException
+		{
+			SaleTicket t = new SaleTicket();
+
+			Thread t1 = new Thread(t);
+			Thread t2 = new Thread(t);
+			t1.start();
+			Thread.sleep(10);
+			t.flag = false;
+			t2.start();
+		}
+	}
+	如果同步函数被static修饰呢：static方法随着类的加载而加载，这时候不一定有该类的对象，但是一定有一个该类的字节码文件对象，这个对象简单的表示方式就是：类名.class
+    描述类的类：Class  
+
+95   //饿汉式。相对与多线程并发，安全！
+
+		class Single
+		{
+			private static final Single SINGLE_INTSTANCE = new Single();
+			private Single(){}
+			public static Single getInstance()
+			{
+				return SINGLE_INTSTANCE;
+			}
+		}
+
+    //懒汉式。延迟加载模式。
+		/*
+		在多线程并发访问时，会出现线程安全问题。
+		加了同步就可以解决问题。无论是同步函数，还是同步代码块都行。
+		但是，效率低了。
+		怎么解决效率低的问题。---->每次都要进行锁判断，会消耗资源
+		可以通过if对单例对象的双重判断的形式,只有在进入同步时才会多一个if判断
+
+
+		*/
+		class Single
+		{
+			private static Single s = null;
+			private Single(){}
+			public static  Single getInstance()
+			{
+				if(s==null)
+				{
+					synchronized(Single.class)
+					{
+						if(s==null)
+							//-->0 
+							s = new Single();
+					}
+				}
+				return s;
+			}
+		}
+
+		class Demo implements Runnable
+		{
+			public void run()
+			{
+				Single.getInstance();
+			}
+		}
+
+
+		class ThreadSingleTest 
+		{
+			public static void main(String[] args) 
+			{
+				System.out.println("Hello World!");
+			}
+		}
+96  同步函数，同步代码块。
+
+		同步代码块使用的任意的对象作为锁。
+		同步函数只能使用this作为锁。
+
+
+		如果说：一个类中只需要一个锁，这时可以考虑同步函数，使用this，写法简单。
+		但是，一个类中如果需要多个锁，还有多个类中使用同一个锁，这时只能使用同步代码块。
+
+		建议使用同步代码块
+	
+97   
+	死锁：
+
+		场景一：
+           同步嵌套。(同步锁嵌套)
+
+     class SaleTicket implements Runnable
+		{
+			private int tickets = 100;
+			//定义一个boolean标记。
+			boolean flag = true;
+			Object obj = new Object();
+			public void run()
+			{
+				if(flag)		
+					while(true)
+					{
+						synchronized(obj)//obj lock
+						{
+							sale();//this lock
+						}
+					}
+				else
+					while(true)
+						sale();
+			}
+
+			public synchronized void sale()//this lock
+			{
+				synchronized(obj)//obj lock
+				{
+					if(tickets>0)
+					{	
+						try{Thread.sleep(10);}catch(InterruptedException e){}//让线程到这里稍微停一下。
+						System.out.println(Thread.currentThread().getName()+".....func...."+tickets--);
+					}
+				}
+			}
+		}
+
+
+
+		class DeadLockDemo 
+		{
+			public static void main(String[] args) throws InterruptedException
+			{
+				SaleTicket t = new SaleTicket();
+
+				Thread t1 = new Thread(t);
+				Thread t2 = new Thread(t);
+				t1.start();
+				Thread.sleep(10);
+				t.flag = false;
+				t2.start();
+			}
+		}
+		
+
+		//同步嵌套，死锁。
+
+		class Task implements Runnable
+		{
+			private boolean flag;
+			Task(boolean flag)
+			{
+				this.flag = flag;
+			}
+			public void run()
+			{
+				if(flag)
+				{
+					while(true)
+						synchronized(MyLock.LOCKA)
+						{
+							System.out.println("if.....locka");
+							synchronized(MyLock.LOCKB)
+							{
+								System.out.println("if.....lockb");
+							}
+						}
+				}
+				else
+				{
+					while(true)
+						synchronized(MyLock.LOCKB)
+						{
+							System.out.println("else.....lockb");
+							synchronized(MyLock.LOCKA)
+							{
+								System.out.println("else.....locka");
+								
+							}
+						}
+				}
+			}
+		}
+
+		class MyLock
+		{
+			public static final Object LOCKA = new Object();
+			public static final Object LOCKB = new Object();
+		}
+
+
+
+
+		class DeadLockTest 
+		{
+			public static void main(String[] args) 
+			{
+				//创建线程任务。
+				Task t1 = new Task(true);
+				Task t2 = new Task(false);
+				new Thread(t1).start();
+				new Thread(t2).start();
+			}
+		}
+		
+98  多线程间的通信。多个线程都在处理同一个资源，但是处理的任务却不一样。
+		生产者，消费者。
+
+		通过同步，解决了没生产就消费的问题。
+
+		但是出现了连续的生产没有消费的情况，和需求生产一个，消费一个的情况不符。
+
+		使用了等待唤醒机制。
+		wait():该方法可以让线程处于冻结状态，并将线程临时存储到线程池中。
+		notify():唤醒指定线程池中的任意一个线程。
+		notifyAll():唤醒指定线程池中的所以线程。
+
+
+
+		这些方法必须使用在同步中，因为它们用来操作同步锁上的线程的状态的。
+
+		在使用这些方法时，必须标识它们所属于的锁。标识方式就是 锁对象.wait();  锁对象.notify();  锁对象.notifyAll();
+
+		相同锁的notify()，可以获取相同锁的wait();
+		
+		
+		多生产多消费。
+
+			问题1：
+				重复生成，重复消费。
+				原因：经过复杂的(等，资格)分析，发现被唤醒的线程没有判断标记就开始工作(生成or消费)了。
+				导致了重复的生成和消费的发生。
+
+				解决：那就是被唤醒的线程必须判断标记。
+					使用while循环搞定。
+
+
+
+			问题2：
+				死锁了。所有的线程都处于冻结状态。
+				原因：本方线程在唤醒时，又一次唤醒了本方线程。而本方线程循环判断标记，又继续等待。
+				而导致所有的线程都等待了。
+
+				解决；希望本方如果唤醒了对方线程，就可以解决。
+					可以使用notifyAll()方法。
+					那不是全唤醒了吗？是的。既有本方，又有对方。但是本方醒后，会判断标记继续等待。
+					这样对方就有线程可以执行了。
+
+
+
+			已经实现了多生产多消费。
+
+			但是有些小问题，效率有点低，因为notifyAll也唤醒了本方。做了不必要的判断。-------->分析时一定要注意线程是在程序哪个部分被唤醒，是否需要做标记判断
+			*/
+
+
+			//描述资源。
+			class Res
+			{
+				private String name;
+				private int count = 1;
+
+				//定义标记。
+				private boolean flag;
+				//提供了给商品赋值的方法。
+				public synchronized void set(String name)//
+				{
+					while(flag)//判断标记为true，执行wait。等待。为false。就生产。
+						try{this.wait();}catch(InterruptedException e){}//t0(等)  t1(等)
+					this.name  = name + "--" + count;//面包1  ，面包2 面包3
+
+					count++;//2  3 4
+
+					System.out.println(Thread.currentThread().getName()+"...生产者....."+this.name);//t0  面包1、 t0 面包2 t1 ，面包3
+					//生成完毕，将标记改为true。
+					flag = true;
+
+					//唤醒所有等待线程(包括本方线程)。
+					this.notifyAll();
+				}
+
+				//提供一个获取商品的方法。
+				public synchronized void get()//
+				{
+					while(!flag)
+						try{this.wait();}catch(InterruptedException e){}//t2(等)  t3(等)
+					System.out.println(Thread.currentThread().getName()+".......消费者....."+this.name);//t2  面包1.
+
+					//将标记改为false。
+					flag = false;
+					//唤醒所有等待线程(包括本方线程)。
+					this.notifyAll();
+				}
+			}
+
+
+			//生成者。
+			class Producer implements Runnable
+			{
+				private Res r;
+				Producer(Res r)
+				{
+					this.r = r;
+				}
+				public void run()
+				{
+					while(true)
+						r.set("面包");
+				}
+			}
+
+			//消费者
+			class Consumer implements Runnable
+			{
+				private Res r;
+				Consumer(Res r)
+				{
+					this.r = r;
+				}
+				public void run()
+				{	
+					while(true)
+						r.get();
+				}
+			}
+
+
+
+
+			class  ProducerConsumerDemo3
+			{
+				public static void main(String[] args) 
+				{
+					//1,创建资源。
+					Res r = new Res();
+					//2，创建两个任务。
+					Producer pro = new Producer(r);
+					Consumer con = new Consumer(r);
+
+					//3,创建线程。
+					Thread t0 = new Thread(pro);
+					Thread t1 = new Thread(pro);
+					Thread t2 = new Thread(con);
+					Thread t3 = new Thread(con);
+
+					t0.start();
+					t1.start();
+					t2.start();
+					t3.start();
+				}
+			}
+			
+
+Days15
+99   见code文件夹
+     
+	 同步代码中，同时唤醒多个线程也不会出现不安全问题，因为同步中线程的执行不仅要有执行资格，而且必须持有对应的锁才能被执行。
+	 异常的出现能结束对应的线程的任务运行。
+	 
+	 
+103  开发中常用多线程写法
+		class ThreadTest 
+		{
+			public static void main(String[] args) 
+			{
+				/*
+				new Thread()----->创建匿名线程对象
+				{
+					public void run()
+					{
+						for(int x=0; x<50; x++)
+						{
+							System.out.println("x="+x);
+						}
+					}
+				}.start();
+				
+
+				Runnable r = new Runnable()------>创建匿名任务对象
+				{
+					public void run()
+					{
+						for(int x=0; x<50; x++)
+						{
+							System.out.println("y="+x);
+						}
+					}
+				};
+				Thread t = new Thread(r).start();----->随时插入线程任务
+		//		t.join();
+				
+
+
+				for(int x=0; x<50; x++)
+				{
+					System.out.println("z="+x);
+				}
+				
+				*/
+				//---------结果是什么？----------------
+				new Thread(new Runnable()----->new Runnable(){}是Thread类中的任务对象，而匿名线程对象是Thread的子对象，它调用的是子类中的任务，会覆盖父类中的任务方法。
+				{
+					public void run()
+					{
+						System.out.println("1runnable run....");
+					}
+				})
+				{
+					public void run()
+					{
+						System.out.println("2subThread...run....");
+					}
+				}.start();
+
+			}
+		}
+
+		
+Days16  Eclipse
+1  快捷键：
+        ctrl+shift+L:查看修改快捷键     window ---- Preperences ---  General -- Keys
+        Alt+/: show Template Proposals 显示模板建议
+		shift+enter:跳到下一次应该在的地方
+		ctrl+shift+O:一次性导入所有包
+		
+		写代码时，如果行首出现大红×，说明出现标准语法错误     如果出现红色小×，可以在红色波浪线处：Ctrl+1---->提供可解决问题的方案
+		黄色波浪线：提示定义的变量没有使用
+		
+		光标在某一行，先要ctrl+shift：选中该行  ctrl+alt+光标向上：向上复制一行    光标向下：向下复制一行；   alt+光标向上下：移动该行到指定行
+		光标在任意行：ctrl+D:删除一行     ctrl+/:注释或者取消注释   ctrl+shift+/:多行注释  取消多行注释：光标在注释的任意行，Ctrl+shift+\
+		字母大小写：选中，Ctrl+shift+x--->大写   Ctrl+shift+y:小写
+		for,Alt+/,代码自动生成，如果需要改蓝色字块，tab键即可向前选中，shift+tab向后选中
+		
+		Ctrl+:font size增加   Ctrl-:font size 减少  Ctrl+shfit—：撤回操作 
+		Ctrl+F8:java或者Debug切换
+		
+		设置操作撤回次数：General--->Editor--->Text Editor-->Undo History size
+		复制：Alt+W     粘贴：Ctrl+Y   剪切：Ctrl+W
+		
+		运行：Ctrl+F11     窗口布局：鼠标选中窗口，拖动到空白处即可
+		
+2   悬浮提示去除：Window---->Java-->Editor--->Hovers(悬浮)---->去除Combined Hovers   想看悬浮内容时：光标放在想看的位置，F2
+    显示行号：Window--->General--->Editor--->Text Editor-->勾上show lines number   或者右键，show line number     字体颜色和大小之类设置 
+	
+	对于代码中重复使用部分，需要封装成函数的，选中右键--->Refactor--->Extract Method即可自动生成
+	代码规范：Ctrl+Shfit+F：代码标准格式化
+	光标到指定位置：Ctrl+i
+	   
+3   String对象：   String str = new String("hello")  或者String  str = "hello";
+    exp: String str = "hello";  String sstr1 = new String("hello");
+	     System.out.println(str == str1)//false,比较的是地址;    System.out.println(str1.equals(str1))//true,比较的是内容
+		 
+		 str；在内存中一个对象，虚拟机启动时存放在内存中方法区中的常量池中，是“hello”；
+		 str1:在内存中两个对象，一个在虚拟机启动时存放在方法区中的常量池中，是“hello”，在new时堆内存中开辟一片区域，构造函数初始化，传进来“hello”,对象是new String
+		 
+		 String str1 = “abc”;  String str2 = "abc";  System.out.println(str1 == str2)//true:都是指向常量池中的String “abc”;
+		 
+		 String 对象中的方法：查阅API文档  或者：比如查找字符串长度的函数：String str = "abc";int a = str.---->会出现一堆String对象的方法
+		 查找字符出现的位置：str.indexOf("a")   从后往前查找字符出现的位置：str.lastIndexOf("a")    查找返回第一次出现的字符位置
+		 
+		 字符串比较方法：int num = "abc".compareTo("bcd");  对象比较功能定义在接口中  Object中定义的是所有对象都有的通用功能：比如比较相等equals,比较地址
+		 只要让对象实现comparable接口就可以实现比较   字符串的compareTo()方法自己定义了排序的方法，是字典排序，也就是字符<数字<字母
+		 
+4   Debug:
+        F8:继续运行直到下一个断点    F5:进入当前方法   F6:运行下一行代码  F7:退出当前方法，返回到调用层
+		选择不同视图：Window--->show view--->Other
+		
+Days17 
+5   StringBuffer（查询API文档）:字符串缓冲区，作为一个字符容器，长度可以变化，可以对内容通过指定的
+         方法进行修改，容器对象一般都会具备对容器中的元素进行操作的功能，增删改查。缓冲区可以存储
+		 不同类型的数据。最终缓冲区存储的数据都会变成字符串
+    比如：  String str = "a"+4+"c";
+	//在内存中的过程  1 创建一个字符串缓冲容器  2 将要组成字符串的元素存储起来  3 最后将缓冲区填充
+	   数据变成字符串
+	str = new StringBuffer().append("a").append(4).append("c").toString();StringBuffer().append()
+	    返回的是StringBuffer容器    对象转换成字符串方法：toString()
+		
+6   StringBuffer:缓冲区可以对数据进行临时存储
+    了解缓冲区的常见方法：
+        添加元素：StringBuffer().append(各种类型的数据)追加     StringBuffer().insert(index,各种类型数据)
+                  指定位置添加。
+                  注意：println方法会将所有要打印的数据先转换成字符串再输出，对于对象会自动调用toString方法
+		删除元素：StringBuffer().delete(start,end);
+		修改元素：StringBuffer().replace(int start,int end,String str)
+		StringBuffer().setlength(int num):返回指定长度的StringBuffer，如果超出原长度，用null代替
+		StringBuffer().reverse():翻转
+		
+7   StringBuffer()构造方法：（实际是以数组的形式存储数据）
+        StringBuffer():构造一个其中不带有字符的字符串缓冲区，其初始容量为16个字符
+		StringBuffer(int capacity):构造一个不带字符，但是具有指定初始容量的字符串缓冲区
+		
+	StringBuffer内部维护着一个“可变长度数组”：当数据长度超过内部数组长度时，会创建一个新的数组，新数组的
+	     长度是原数组的1.X倍，原数组的数据会复制到新数组，新元素也会添加到新数组。
+		 
+	什么时候使用字符串缓冲区：数据很多，个数无所谓确定，类型无所谓确定，只要最后都转成字符串，就使用
+		使用局限性：必须最终转成字符串  无法对存储进来的元素进行单独操作，因为存储进来的元素都变成了字符串
+
+    难点：
+        code:StringBuffer buf1 = new StringBuffer("hello");
+		     StringBuffer buf2 = new StringBuffer("java");
+			 test(buf1,buf2);
+			 System.out.println(buf1+"..."+buf2);///java....java
+			 
+			 public static void test(StringBuffer buf1,StringBuffer buf2)
+			 {
+			   buf1.append(buf2);
+			   buf1 = buf2;
+			 }
+		
+		内存空间显示：
+		
+		         栈空间 											堆空间
+		                                                        0x01--->"hello"
+				test												    "java"---buf1.append(buf2)
+		出栈<-- buf1--->0x01--->0x04(buf1=buf2)									
+				buf2--->0x04									 0x04--->"java"
+				 
+															
+		         main 
+				 buf1--->0x01
+				 buf2--->0x04
+				 
+8   JDK1.5以后出现了StringBuilder,和StringBuffer用法一样
+    StringBuffer是线程同步容器  StringBulilder是线程不同步的，一般单线程可以选择StringBuilder，速度快
+	将非同步容器变成同步容器：将所有操作容器的方法加同步锁
+	
+9   基本数据类型对象包装类：将基本数据值封装成对象，好处：可以在对象中定义更多属性和行为对基本数据
+        进行操作
+		
+		byte----Byte    short---Short   int---Integer   long---Long  boolean---Boolean 
+		float---Float   double---Double  char---Character
+		//基本数据类型对象包装类的重要功能:在基本类型和String类型之间互相转换
+		
+		查看API文档自己找方法
+		//int的范围最值，只有int自己最清楚，所以找int对应的对象最合适   Integer.MAX_VALUE
+		//Integer.toBinaryString(num);
+		
+		字符串转成基本数据类型：使用的是 parse基本类型(字符串)  parseInt  parseByte  parseDouble  parseBoolean
+		Integer.parseInt("23",10):说明23是十进制，输出十进制   Integer.parseInt("110",2):说明110是二进制，输出十进制
+		
+		//基本类型转换成字符串
+		System.out.println(""+3+4);    System.out.println(Integer.toString(3)+4);
+		
+		//为了对整数进行更多的操作，可以将整数封装成对象，通过Integer的方法完成
+		int---->Integer   Integer i1 = new Integer(4)   Integer i11 = new Integer("4");//构造方法：
+		                  Integer i2 = Integer.valueOf(4)//静态方法
+		Integer-->int     Integer ix = new Integer(4);   int x = ix.intValue()
+		
+10  JDK1.5以后，新的技术：自动装箱自动拆箱，像操作int一样操作Integer
+    Integer i = new Integer(4);   JDK1.5以后//Integer i = 4//自动装箱，内部实际上：Integer.valueOf(4);
+		 
+	Integer i = 4;  i = i+4//右边的i自动拆箱 i.intValue()+4  运算结束后的结果又一次装箱赋值给i
+
+    public static void sop(Object s){} sop)(5)//Object s = Integer.valueOf(5)自动装箱
+
+    Integer x= new Integer(100);  Integer y = new Integer(100);
+    System.out.println(x == y)//false   System.out.println(x.equals(y));//true  Integer重写了Object
+       中equals方法，比较int值是否相等
+
+    //JDK1.5以后，自动装箱的值如果在byte范围内，相同的值不会单独开辟空间，而是重复使用
+	
+11  集合类：集合是存储对象最常用的一种方式，容器
+    数组与集合：数组虽然也可以存储对象，但是长度固定，集合长度可变，数组中可以存储基本数据类型
+	     集合只能存储对象     集合可以存储不同类型的对象
+		 
+	因为容器中数据结构不同，容器有很多种，不断地共性功能抽取，形成了集合体系-->集合框架顶层就称之为Collection接口，里面定义了集合的基本功能
+	
+	Collection接口中的共性功能(Collection在java.util包中，可通过索引查找)：
+	   添加：
+	       boolean add(Object obj):一次添加一个(true添加成功，false添加失败)
+		   boolean addAll(Collection c):将指定容器中所有的元素添加
+		  
+	   删除：
+	        void clear()；删除容器中所有元素
+			boolean remove(Object o):删除容器中指定元素
+            boolean removeAll(Collection c):删除此Collection中那些也包含在指定Collection中的所有元素    
+    	
+	    获取长度：int size(Collection c):返回容器元素个数
+		
+		判断 boolean contains(Object o):如果此Collection中包含指定元素，返回true
+			 boolean containsAll(Collection c):如果此Collection中包含指定collection中的所有元素，返回true
+			 boolean equals(Object o):比较此colletion与指定对象是否相等
+			 boolean isEmpty():判断是否为空
+			 
+		将集合转换成数组：toArray()
+		boolean retainAll(Collection c):仅保留此Collection中那些也包含在指定Collection中的元素，与removeAll相反
+		
+		exp:Collection coll = new ArrayList();   //删除会改变集合的长度
+		
+		取出集合元素：Iterator iterator()   获取集合中元素上迭代功能的迭代器对象
+		    迭代：取出元素的一种方式：有没有？有，取一个，有没有？有，取一个，有没有？没算了
+			迭代器：具备迭代功能的对象，而迭代器对象不用new，直接通过调用iterator()方法获取即可，方法内部已经创建 了迭代器对象
+		   
+		exp: Collection coll = new ArrayList();  Iterator it = coll.iterator();  while(it.hasNext()){System.out.println(it.next())};
+		开发中：for(Iterator it = coll.iterator();it.hasNxt();){System.out.println(it.next())}---->保证it迭代器只在for循环中有效，节省内存
+		
+		迭代器是取出Collection中元素的公共方法。
+		
+12  Collection 
+		|---List:有序(存入的顺序和取出的顺序一致)，有索引，允许重复元素
+		|---Set:不允许重复元素
+		
+	List: 增---add(index,element)   删---remove(index)   改---set(index,newelement)  查--- int indexOf(element)  element get(index)
+	      List取出所有元素：迭代器取出----
+                            get: for(int i = 0;i<list.size();i++){System.out.println(list.get(i))}	
+          
+		  //在遍历的过程中，如果遍历到abc2,就添加一个元素haha
+          for(Iterator it = list.iterator();it.hasNext();){Object obj = it.next();
+		  if(obj.equals("abc2")) list.add("haha");  //java.util.ConcurrentModificationException;迭代过程中使用了集合对象同时对集合中的元素进行了操作，
+		                                              导致了迭代的不确定性，引发该异常,也就是迭代器和List容器同时操作容器，引发并发操作异常
+		  }							
+	    //解决方法：在迭代过程中，想要执行一些操作，采用迭代器方法就可以了(避免并发错误)
+		//使用List集合特有的迭代器：ListIterator   通过List集合的方法listIterator()方法获取该迭代器对象。
+		
+		List集合的具体子类：子类之所以区分是因为内部的数据结构(存储数据的方式)不同 
+		    |---Vector:数据结构是可变长度的数组(不断new新数组并将原数组的元素复制到新的数组)，线程同步，增删查询都慢
+			|---ArrayList：也是数组结构，也是可变长度，线程不同步，替代了Vector,增删速度不快(数组内存是连续的，每一次增删都会引起全部元素的变动)，
+			               查询速度很快(地址连续，查询快)
+		    |---LinkedList:链表结构，线程不同步，增删速度快(类似手拉手，每个元素存储自己前一个元素的地址)，查询速度慢(内存中地址分散)
+			
+13  Eclipse技巧：比如创建Person类，包含name,age,创建时set和get方法以及构造函数都不用手动创建，直接Shift+Alt+S:查找，自动创建
+	exp: class Person{}   Person p1 = new Person(); list.add(p1)//注意，add(Object obj)add方法接收的对象是Object,会将你传入的Person对象向上转型，
+	     当你需要用到Person的具体方法是，需要向下转型
+
+14  注意List中增删时，同时改变了List的长度，会影响程序索引。    ///对象中的equals方法继承的Object，而Object的equals方法判断的是地址是否相同	，所以如果你要判断Person
+    对象是否相等，要覆盖原有的equals方法，建立自己的判断相等的标准         contains中判断调用的就是equals方法
+
+    使用LinkedList实现堆栈，队列的数据结构  	
+		
+
+
+15  HashSet:
+       |---LinkedHashSet:具有可预知迭代顺序的Set接口的哈希表和链接列表实现，也就是哈希表中每一个元素还记录着下一个元素的哈希地址，链接列表定义了迭代顺序。
+	   
+	TreeSet:对元素进行排序   如果对自定义对象：需要实现Comparable接口，实现compareTo()方法，同equals()方法类似。 字符串自己拥有compareTo方法，不用实现,按照字典顺序比较
+	         Object实现equals方法，但是比较的是两者的地址,String类的equals方法重写，判断是内容
+			 
+			 二叉树数据结构，可以对元素进行排序，不同步
+			 如何保证唯一性：参考的就是比较方法的返回值是否是0，是就是重复元素，就不存
+			 排序方式：需要元素具备比较功能，所以元素需要实现Comparable接口，覆盖compareTo方法。
+			 
+			 如何实现输入输出有序：compareTo中，判断是否相同，是就返回0，其他全部返回1，就可以实现。
+			 
+			 如果比较的是两个条件：姓名和年龄-----compareTo中：int temp = this.age - obj.age; return temp==0?this.name.compareTo(obj.name):temp
+			 注意：equals比较返回的是布尔类型，字符串的compareTo返回的是数字。
+			 
+			 需求中也有这样一种情况，元素具备的比较功能不是所需要的，也就是说不想按照自然排序的方法 ，而是按照自定义的排序方法对元素排序，这时只能使用第二种方式
+			 即：让集合具备比较功能。
+			 
+			 实现comparator接口，覆盖compare方法，将Comparator接口的对象作为参数传递给TreeSet集合的构造函数。
+			 
+			 技巧：
+				jdk1.2以后出现的集合框架中的常用子类对象，存在的规律。
+				前缀名是数据结构名，后缀名是所属体系名。
+
+				ArrayList: 数组结构。看到数组，就知道查询快，看到list，就知道可以重复。可以增删改查。
+
+				LinkedList: 链表结构，增删快。xxxFirst xxxLast. xxx:add get remove
+
+				HashSet: 哈希表, 就要想到元素必须覆盖hashCode equals，不保证有序。看到Set，就知道不可以重复。
+
+				LinkedHashSet: 链表+哈希表。可以实现有序，因为有链表。
+
+				TreeSet:二叉树，可以排序。就要想要两种比较方式：一种是自然排序Comparable，一种是比较器Comparator。
+						 
+	            JDK1.5特性：增强for循环，作用：用于遍历Collection集合或者数组
+				格式：for(元素类型 变量：Collection容器 或者 数组){}-----内部本质上还是实现迭代，本质上是把迭代器抽出来(foreach)
+				增强for必须有被遍历的目标，目标只能是Collection或者数组------只能遍历，不能做其他操作
+				
+				/*
+			 * Enumeration:枚举。
+			 * 具备枚举取出方式的容器只有Vector。
+			 */
+			
+			Vector v = new Vector();
+			
+			v.add("abc1");
+			v.add("abc2");
+			v.add("abc3");
+			v.add("abc4");
+			
+			//获取枚举。
+			for(Enumeration en  = v.elements();en.hasMoreElements();){
+				System.out.println("enumeration:"+en.nextElement());
+			}
+			
+			//获取迭代。
+			for (Iterator it = v.iterator(); it.hasNext();) {
+				System.out.println("iterator:"+it.next());
+				
+			
+Days 19
+16  List list = new ArrayList(); list.add("bbc"); list.add(4)//list.add(Integer.valueOf(4));集合中不能存储基本类型，能存一切对象
+
+    泛型：在JDK1.4版本之前，容器什么类型的对象都可以存储，但是在取出时，需要用到对象的特有内容时，需要做向下转型，但是对象类型不一致时，导致了向下转型
+	      发生ClassCastException异常，为了避免这个问题，只能主观上控制往集合中存储的对象类型保持一致。
+		  
+		  JDK1.5以后解决了该问题，在定义集合时就直接明确集合中存储的元素的具体类型，这样，编译器在编译时就可以对集合中存储的对象进行检查，一旦类型不匹配，
+		  编译失败，这个技术就是泛型
+		  
+	List<String> list = new ArrayList<String>(); for(Iterator<String> it;list.it.hasNext();){it.next()//就不用再进行类型转换}
+	泛型好处：将运行时期的问题转移到编译时期，可以更好的让程序员发现并解决问题，避免了向下转型的麻烦  泛型就是应用在编译时期的一项安全机制
+	
+	泛型擦除：编译器通过泛型对元素类型进行检查，只要检查通过，就会生成class文件，但是在class文件中，就将泛型标识擦除
+	
+	泛型表现：泛型技术在集合框架中应用的范围很大。  只要看到类，或者接口在描述时右边定义<>，就需要泛型   其实是，容器在不明确操作元素的类型的情况下
+	          对外提供了一个参数<E/T>。使用容器时，只要将具体的参数传递给该参数即可，说白了，泛型就是传递类型参数。(传入的必须是类型参数，比如Integer)
+			 在hashSet中，覆盖的equals方法是继承Object，必须要进行类型转换，不存在泛型一说。 
+			
+17  当要操作的对象类型不确定时，可以在定义类时就明确参数，由使用该类的调用者来传递具体的类型：泛型类
+         class Tool<E>{...};Tool<Person> p = new Tool<Person>();
+
+18  class Demo<E>{ public void show(W w){//show方法的参数类型随泛型类，在new对象时由调用者给出};   public static void show(W w){}//静态方法是无法访问类上定
+     义的泛型的，泛型只能定义在方法上。   public<Q> void print(Q q)//泛型方法，方法的参数由调用者给出}；
+	 
+	泛型接口：interface Inter<T>{public void show(T t)} class InterImpl implements Inter<String>{public void show(String t)}
+	也可以：class InterImpl<W> implements Inter<W>{public void show(W t){System.out.println("show"+t)};}  class SubDemo extends InterImpl<String>{}
+	
+	泛型两边类型要保持一致：List<Object> list = new ArrayList<String>//编译失败
+	
+	打印集合中元素：但是在不明确具体类型时，可以使用通配符来标识：public static void printCollection(Collection<?> coll){for(Iterator<?>) it=coll.iterator();
+	 it.hasNext();)Object obj = it.next();System.out.println(obj)}
+	 
+	泛型限定：  ? extends E:接收E类型或者E的子类型   ？ super E:接收 E类型或者E的父类型
+	    比如我想打印Student和Worker，固然可以使用通配符，但是如果我想缩小范围，可以使用private static void printCollection(Collection<? extends Person> coll)//Student和Worker都是Person的子类
+	    {for(Iterator<? extends Person> it = coll.iterator();it.hasNext();)Person obj = it.next();System.out.println(obj.getName();)}
+		
+		使用：API中支持的各种类型和接口(TreeSet)：TreeSet的构造函数
+		1  TreeSet(Collection<? extends E> c):构造一个包含指定collection元素的TreeSet.
+		   一般往集合中存储元素时，如果集合定义了E类型通常情况下应该存储E类型的对象，对E的子类型的对象E也可以接收，所以这时候可以将泛型定义为E的上限
+		   
+		2  TreeSet(Comparator<? super E> comparator):构造一个新的空TreeSet，它根据指定比较器进行排序
+		   当从容器中取出元素操作时，可以用E类型接收，也可以用E的父类型接收----比较器用来比较从集合中取出的元素，所以比较器接收用泛型下限
+		   
+注意：“a”:String   'a':char
+
+API中其他类：(学会自己查API文档，然后自己代码实践)
+
+    Date:java.util包中，不过JDK1.1后，使用Calendar类实现日期和时间字段之间转换，使用DateFormat类来格式化和解析日期字符串，Date中相应的方法已经废弃。
+	     Date date = new Date(); System.out.println(date); //想要把日期按照我们的习惯格式化一下，找到DateFormat类，是抽象类，可以通过DateFormat中的静态工厂
+		 方法来获取实例  DateFormat dateFormat = DateFormat.getDateInstance();//默认显示格式  String_str_date = dateFormat.format(date); System.out.println(str_date);
+		 加入风格：dateFormat = DateFormat.getDateInstance(DateFormat.Full);
+		 //DateFormat.format：将日期对象转成日期格式的字符串
+		 //如果要转成自定义的格式：xxxx/xx/xx,只能自定义对象，只有子类SipleDateFormat可以
+		 dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+		 
+		 //有日期格式的字符串。需要将日期格式的字符串转换成日起对象，解析：DateFormat.parse
+		 String str_date = "2017-11-11";DateFormat dateFormat = DateFormat.getDateInstance(); Date date = dateFormat.parse(str_date)//要抛出解析异常; System.out.println(date);
+		 日期的获取：用Calendar类中方法。
+		 
+		 毫秒值转成日期：long time = System.currentTimeMillis();  Date date = new Date(time); DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.Long)
+		     Strnig str_date = dateFormat.format(date);System.out.pritnln(str_date);
+		日期对象转成毫秒值：Date对象的getTime();  long time = date.getTime();
+		 
+Calendar类：抽象，通过类方法getInstance来获得此类型的一个通用的对象实例。
+        Calendar c = Calendar.getInstance(); 日历中自动维护着一张Map表，分别对应字段和值，比如YEAR=2017.....只要根据键值寻找对应的值就可以
+		int year = c.get(Calendar.YEAR);  int month = c.get(Calendar.MONTH)+1;//系统中从0-11；   int day = c.get(Calendar.DAY_OF_MONTH); String week = getWeek(c.get(Calendar.Day_OF_WEEK));
+		private static String getWeek(int i){if(i>7 || i<=0){throw new NotWeekException("没有对应的星期")}; String[] weeks = {"","星期日"，"星期一",....,"星期六"};return weeks[i]}
+		
+        设置对应的时间值：void set(int field,int value)//将给定的日历字段设置为给定值 c.set(Calendar.YEAR,2018);  void set(int year,int month,int date)//设置
+		     日历字段YEAR MONTH DAY_OF_MONTH的值  c.set(2017,11,11);
+		日期偏移：c.add(Calendar.YEAR,4);c.add(Calendar.YEAR,-4);时间是连续的，如果month显示12,则为下一年的1月
+		
+		任意一年二月有多少天：三月一日的前一天就是    int year = 2018;c.set(year,2,1);c.add(Calendar.DAY_OF_MONTH,-1);即可。
+		
+		/2012/3/17和2012-5-28间隔多少天：获取毫秒值，字符串-->日期对象-->毫秒值
+		public static void getDays()
+		{
+		  String str_date1 = "2012/3/17";String str_date2 = "2012-5-28";//如何将日期格式字符串解析成日期对象，还要自定义风格对象 
+		  DateFormat dateFormat1 = new SimpleDateFormat("yyyy/MM/dd");//定义一个默认风格 DateFormat dateFormat2 = DateFormat.getDateInstance(DateFormat.MEDIUM);
+		  //如果显示解析错误，用打印函数测试 Date date = new Date(); String str_date = dateFormat2.format(date);System.out.println(str_date);
+		  //对日期格式字符串进行解析  Date date1 = dateFormat1.parse(str_date1); Date date2 = dateFormat2.parse(str_date2);
+		  //通过日期对象获取毫秒值  long time1 = date1.getTime(); long time2 = date2.getTime();  long time = Math.abs(time1-time2);
+		  int day = transDay(time);System.out.println(day);  prpivate staitc int transDay(long time){return (int)(time/1000/60/60/24);}
+		}
+		
+上下泛型：取决于最后能不能取出符合条件的对象，比如<? super T>,T实际对象是studen，取出的时候用Person能够通过向上转型取出student,所以正确，向下转型也是如此。
+
+调用java自带的库中的函数，直接在Ecl中查看函数源代码，多看看，学习经典函数写法。
+
+collections中通用型比较器写法：
+     public static<T extends Object & Comparable<? super T>> T getMax(Collection<? extends T> coll){
+	  Iterator<? extends T> it = coll.iterator();  T max = it.next();  while(it.hasNext()) { T temp = it.next(); if(temp.comparaTo(max)) max = temp;}
+	   }
+	   
+	colelctions中有一个可以将非同步集合转换成同步集合的方法---同步集合 synchronized 集合(非同步集合);
+	
+	
+	
+	
+IO流：处理设备之间的数据传输    java对数据的操作是通过流(系统资源)的调用的方式  java用于操作流的对象都在java.io包中
+   流：系统资源，windows系统本身就可以操作设备，各种语言只是使用系统平台上的这个资源，并对外提供了各种语言自己的操作功能，这些功能最终调用的是系统资源，使用完
+       系统资源，一定要释放
+   设备上数据的最常见表现形式就是文件file，从文件的基本操作开始学习
+   
+   操作文件和目录的类：File
+       File file = new File("C:\\1.txt")  = File file1 = new File("C:\\","1.txt");//可以把目录和文件名分开（双\\是为了转义）
+       File dir = new File("C:\\");  File file2 = new File(dir,"3.txt")//把目录封装成对象，可以用对象的方法进行操作
+	   跨系统：File file = new File("C:"+System.getProperty("file.separator")+"1.txt");
+	   而File类中对于分隔符已经定义了字段：File file = new File("C:"+File.seperator+"1.txt");-----与系统有关的默认分隔符
+	   
+	  文件具备的方法：
+	      获取文件名：String getName();
+		  获取文件大小： long length();
+		  获取文件类型：没有
+		  获取所在目录： getParent();
+		  
+		  File file = new File("abc\\1.txt");
+		  String path = file.getAbsolutePath()//获取文件绝对路径，即使封装的是相对路径，获取的也是绝对路径----E:\JavaSE_code\day21e\abc\1.txt
+		  Sring path1 = file.getPath()//获取的是file对象的封装路径，封装的是什么，获取的就是什么，即使封装的路径不存在----abc\1.txt
+		  
+		  获取文件最后一次修改时间：
+		      long time =file.lastModified();
+			  Date date = new Date(time);
+			  DateFormate dateFormate = DateFormate.getDateTimeInstance(DateFormate.LONG,DateFormate.LONG);
+			  String str_date = dateFormate.formate(date);
+		  创建文件： File file = new File("1.txt");  boolean b = file.createNewFile();//如果文件存在，则不创建返回false,不存在就创建。
+		      File file = new File("K:\\1.txt");  boolean b = file.createNewFile();//不存在k盘分区，所以在创建时报错，throw IOException
+			  
+		  删除： file.delete();   文件是否存在： file.exsits();
+		  
+		  创建目录： File file = new File("abc");  boolean b = file.mkdir();
+		  创建多级目录：  File file = new File("abc\\d\e"); boolean b = file.mkdir()//创建失败，因为file封装的是e,而前面的路径不存在，所以无法创建
+		       应该用： boolean b = mkdirs();
+		  删除文件夹时，必须保证文件夹没有内容，有内容，必须要先把内容删除后才可以删除当前文件夹 
+		  
+		  使用isFile()和isDirectory()判断时必须先判断是否存在；
+		  
+		  其他方法自己查询API
+		  
+		  public String[] list():返回一个字符串数组，这些字符串指定此抽象路径表示的目录中的文件和目录名称---列出所有包括隐藏文件，如果目录为空，数组也为空
+		  File[] listFiles():返回一个文件数组
+		  
+		  String[] list(FilenameFilter filter):返回一个字符串数组，这些字符串数组指定此抽象路径名表示的目录中满足指定过滤器的文件和目录。
+		      java.io-- public interface FilenameFilter：实现此接口的类实例可以用于过滤器文件名
+			  方法摘要：  boolean accept(File dir,String name)
+			  public class FilterBySuffix implements FIlenameFilter{
+			    private String suffix;
+				public FilterBySuffix(String suffix)
+				{
+				  super();  this.suffix = suffix;
+				}
+				public boolean accept(File dir,String name)//name 被遍历目录中的文件夹或者文件名
+				{
+				   return name.endsWith(suffix)
+				}
+			  }
+			  
+			  File dir = new File("C:\\");  String[] names = dir.list(new FilterbySuffix(".java"));
+		  
+		    遍历当前目录以及子目录下的所有文件：递归函数不适合写在主函数中，不断进栈太麻烦
+			    public static void getAllFiles(File dir)
+				{
+				  System.out.println("dir"+dir);
+				  File[] files = dir.listFiles();
+				  for(FIle file:files)
+				  {
+				    if(file.isDirectory())
+					{
+					  getAllFiles(file);
+					}else{System.out.println("file"+file);}
+					
+				  }
+				  
+				}
+		
+		递归删除有内容的文件夹，从最里面向外删除
+		    public static void deleteDir(File dir)
+			{
+			  File[] files = dir.listFiles();
+			  for(File file:files)
+			  {
+			    if(file.isDirectory())
+				{
+				   deleteDir(file);
+				}
+				else
+				{
+				  Syste.out.println(file+":"+file.delete());
+				}//删除文件夹中内容
+			  }
+			  System.out.println(dir+":"+dir.delete());//删除空文件夹
+			  
+			}
+			
+	file只能操作文件的属性，不能操作文件中的内容 
+	
+    操作文件内容要用到io流，分字节流和字符流，先看字节流--OutputStream InputStream
+	 public static void main(Strig[] args) throws IOException
+	 {
+	   //将数据写入文件中
+	   File dir = new File("tempfile");
+	   if(!(dir.exists()))
+	      dir.mkdir();
+	   //创建字节输出流对象，用于操作文件，在对象初始化时，必须明确数据的存储目的地
+	   //数据流关联的目的地，如果不存在会自动创建，，存在则覆盖
+	   FileOutputStream fos = new FileOutStream("tempfile\\fos.txt");
+	   //调用输出流写功能
+	   //String str = "abcde";
+	   //byte[] buf = str.getBytes();
+	   fos.write("abcde".getBytes());
+	   //释放资源
+	   fos.close();
+	   
+	 }
+	 
+	//不要在主函数中声明异常，这样会交给虚拟机处理   
+    io异常处理：
+	   public class IOExceptionDemo
+	   {
+	     public static void main(String[] args)
+		 {
+		   FileOutputStream fos = null;
+		   
+		   try
+		   {
+		     fos = new FileOutputStream("k:\\tempfile\\fos.txt");//不存在k盘
+			 fos.write("abcde".getBytes());
+			 
+		   }
+		   catch (IOException e)
+		   {
+		     System.out.println(e.toString()+"---");//自己的处理方式
+		   }
+		   finally   
+		   {
+		     if (fos != null)  //一定要先判断再决定关闭动作，因为如果创建输出流失败，fos为null，关闭动作失败
+			 {
+			   try   //判断关闭动作
+			   {
+			     fos.close();
+			   }
+			   catch (IOException e)
+			   {
+			     throw new RuntimeException(""+e);  //释放系统资源为系统动作，如果失败，向上抛出异常
+			   }
+			 }
+			   
+		   }
+		 }
+	   }
